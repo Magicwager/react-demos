@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+       /* var industries= ["互联网","教育","汽车销售"]
+        ReactDOM.render(
+        <div>
+        <h1>请您现在所在行业!</h1>
+         <select>
+            {
+                industries.map(function (industry) {
+                        return <options>{industry}</options>
+                    })
+            }
+        </select>
+        </div>,
+         document.getElementById('example')
+        );*/
+
+       var industries= ["互联网","教育","汽车销售"]
+       ReactDOM.render(
+       <div>
+       <h1>请您现在所在行业!</h1>
+       {
+           industries.map(function (industry) {
+                   return <h2>{industry}</h2>
+               })
+       }
+       </div>,
+        document.getElementById('example')
+       );
+    </script>
+</body>
+</html>
