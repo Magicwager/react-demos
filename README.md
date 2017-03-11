@@ -39,23 +39,23 @@ react-dom包提供了DOM操作的具体方法，如：组件渲染、节点找�
  
   React组件如，渲染一个组件到DOM中（render.html）：
 
-    var App = React.createClass({
-      render: function () {
-    return (
-    	<div className="divider">
-    	  <h2>{this.props.children}</h2><hr/>
-    	</div>
-      )}
-    });
-    
-    ReactDOM.render(
-      <App>itbilu.com</App>,
-      document.getElementById('example'),
-      function(){
-    	console.log('rendered done');  
-      }
-    );
-    // rendered done
+		    var App = React.createClass({
+		      render: function () {
+		    return (
+		    	<div className="divider">
+		    	  <h2>{this.props.children}</h2><hr/>
+		    	</div>
+		      )}
+		    });
+		    
+		    ReactDOM.render(
+		      <App>itbilu.com</App>,
+		      document.getElementById('example'),
+		      function(){
+		    	console.log('rendered done');  
+		      }
+		    );
+		    // rendered done
 
 <h3>2. ReactDOMServer类库</h3>
 
