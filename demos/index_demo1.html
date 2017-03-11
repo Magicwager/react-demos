@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      /*text/babel：react独有的jsx语法与javascript不兼容，用到jsx语法的都要加上此标志，
+      * 以下例子即为jsx语法的使用，模板代码在js中不需要用引号，可以与js混合使用
+      * */
+      ReactDOM.render(
+      /*以下为模板*/
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>this is a test</h2>
+      </div>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>
