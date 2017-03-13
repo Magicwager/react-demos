@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <script src="../build/require.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    /*在JSX中导入编写好的CSS文件*/
+
+  /*  @import './styles/bootstrap.css'
+    @import   './styles/style1.css'*/
+
+    /*在JSX文件中定义样式变量,和定义普通的对象变量一样
+    *key 值是用驼峰形式表示的样式名，而其对应的值则是样式值，通常来说这个值是个字符串,如果是数字就不是字符串,不需要引号
+    * */
+
+    /*
+    * 示例中style={{listStyleType:'none'}}内联样式的写法
+    * */
+    let sel_comp={
+        backgroundColor: 'lightsteelblue',
+        height: 200,
+        width: 300,
+        position:'relative',
+        top :'50%',
+        left: '50%',
+        marginLeft: -150,
+        marginTop: 0
+    }
+    let sel_input={
+        border: '1px solid #555555',
+        width: '70%',
+        position: 'absolute',
+        top: 20,
+        left: 50,
+        height: 28,
+        lineHeight: 28
+    }
+    let sel_ul={
+        position: 'absolute',
+        top: 48,
+        left: 50
+    }
+    var fruits=[
+            "橘子",
+            "苹果",
+            "菠萝",
+            "香蕉"
+    ]
+    var SelectComp=React.createClass({
+        render:function(){
+            return <div className='sel_comp' style={sel_comp}>
+               <input className='sel_input'style={sel_input} />
+               <ul className='sel_ul' style={sel_ul}>
+                    {
+                      fruits.map(function(fruit){
+                                return <li className="sel_li" style={{listStyleType:'none'}}>{fruit}</li>
+                            })
+                    }
+               </ul>
+            </div>
+        }
+    })
+    ReactDOM.render(
+            <SelectComp />,
+            document.getElementById("example")
+    )
+
+</script>
+</body>
+</html>

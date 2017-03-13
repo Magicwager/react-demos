@@ -11,19 +11,25 @@
     #example span{
         color:red;
     }
+    .fontcolor{
+        color: #cacaca;
+    }
 </style>
 <body>
 <div id="example"></div>
 <script type="text/babel">
 
     /* react可以将代码封装成组件，然后将组件插入到html当中，生成组件类的方法React.createClass()
-    *  注意：1.定义组件名字，首字母要大写，否则会报错
+    *  注意：1. 定义组件名字，首字母要大写，否则会报错s
     *       2. 组件都必须有一个render方法，用来输出组件
     *       3. 组件类只能有一个顶层标签,多个顶层会报错
+    *       4. 添加组件属性，有一个地方需要注意，就是 class 属性需要写成 className ，for 属性需要写成 htmlFor ，
+    *
+    *       这是因为 class 和 for 是 JavaScript 的保留字,在ES6的语法当中有class类，这是个保留字段
     * */
    var ShowMessage=React.createClass({
        render:function(){
-           return <h2>The link of  {this.props.name} is <span>{this.props.asd}</span></h2>
+           return <h2>{this.props.class}: The link of  {this.props.name} is <span>{this.props.asd}</span></h2>
        }
        /* render:function(){
             return <h2>The link of  {this.props.name} is </h2><span>{this.props.asd}</span>
@@ -31,7 +37,7 @@
    });
 
     ReactDOM.render(
-    <ShowMessage name="Baidu" asd="www.baidu.com" />,
+    <ShowMessage name="Baidu" asd="www.baidu.com" class="header"  className="fontcolor" />,
     document.getElementById('example')
     );
 </script>
