@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    /*
+    * this.props 对象的属性与组件的属性一一对应，但是有一个例外，就是 this.props.children 属性。它表示组件的所有子节点
+    *
+    * propTypes: 用来规定组件属性的类型，如果不符合规定的类型，控制台会抛出异常警告
+    * 随着应用不断变大，保证组件被正确使用变得非常有用。为此我们引入propTypes。React.PropTypes 提供很多验证器 (validator) 来验证传入数据的有效性。
+    * 当向 props 传入无效数据时，JavaScript 控制台会抛出警告。注意为了性能考虑，只在开发环境验证 propTypes。
+    *
+    *
+    *
+    * */
+    var Children=React.createClass({
+        propTypes:{
+          author:React.PropTypes.string.isRequired,
+          title:React.PropTypes.string.isRequired,
+
+            
+            /*可以声明 prop 为指定的 JS 基本类型。默认
+            情况下，这些 prop 都是可传可不传的。*/
+           /* optionalArray: React.PropTypes.array,
+            optionalBool: React.PropTypes.bool,
+            optionalFunc: React.PropTypes.func,
+            optionalNumber: React.PropTypes.number,
+            optionalObject: React.PropTypes.object,
+            optionalString: React.PropTypes.string,*/
+
+            // 所有可以被渲染的对象：数字，
+            // 字符串，DOM 元素或包含这些类型的数组。
+           /* optionalNode: React.PropTypes.node,*/
+
+            // React 元素
+           /* optionalElement: React.PropTypes.element,*/
+
+            // 用 JS 的 instanceof 操作符声明 prop 为类的实例。
+          /*  optionalMessage: React.PropTypes.instanceOf(Message),*/
+
+            // 用 enum 来限制 prop 只接受指定的值。
+           /* optionalEnum: React.PropTypes.oneOf(['News', 'Photos']),*/
+
+            // 指定的多个对象类型中的一个
+           /* optionalUnion: React.PropTypes.oneOfType([
+                React.PropTypes.string,
+                React.PropTypes.number,
+                React.PropTypes.instanceOf(Message)
+            ]),*/
+
+            // 指定类型组成的数组
+         /*   optionalArrayOf: React.PropTypes.arrayOf(React.PropTypes.number),*/
+
+            // 指定类型的属性构成的对象
+           /* optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),*/
+
+            // 特定形状参数的对象
+        /*    optionalObjectWithShape: React.PropTypes.shape({
+                color: React.PropTypes.string,
+                fontSize: React.PropTypes.number
+            }),
+*/
+            // 以后任意类型加上 `isRequired` 来使 prop 不可空。
+          /*  requiredFunc: React.PropTypes.func.isRequired,*/
+
+            // 不可空的任意类型
+         /*   requiredAny: React.PropTypes.any.isRequired,*/
+
+            // 自定义验证器。如果验证失败需要返回一个 Error 对象。不要直接
+            // 使用 `console.warn` 或抛异常，因为这样 `oneOfType` 会失效。
+          /*  customProp: function(props, propName, componentName) {
+                if (!/matchme/.test(props[propName])) {
+                    return new Error('Validation failed!');
+                }
+            }*/
+        },
+        render:function(){
+            return (
+            <ul>
+            {
+                React.Children.map(this.props.children,function(child){
+                    return <li style={{listStyleType:'none'}}>{child}</li>;
+                })
+            }
+            <span>{this.props.author}</span>
+            <span>{this.props.title}</span>
+            </ul>
+            );
+        }
+    })
+    var data=1;
+    ReactDOM.render(
+        <Children author="magicwager"  title={data}>
+            <h2>Hello!</h2>
+            <h2>World!</h2>
+        </Children>,
+        document.getElementById("example")
+    )
+
+
+</script>
+</body>
+</html>
