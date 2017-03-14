@@ -25,7 +25,7 @@
           author:React.PropTypes.string.isRequired,
           title:React.PropTypes.string.isRequired,
 
-            
+
             /*可以声明 prop 为指定的 JS 基本类型。默认
             情况下，这些 prop 都是可传可不传的。*/
            /* optionalArray: React.PropTypes.array,
@@ -81,17 +81,25 @@
                 }
             }*/
         },
+        getDefaultProps : function () {
+            return {
+                message : 'Perfect!'
+            };
+        },
         render:function(){
             return (
-            <ul>
-            {
-                React.Children.map(this.props.children,function(child){
-                    return <li style={{listStyleType:'none'}}>{child}</li>;
-                })
-            }
-            <span>{this.props.author}</span>
-            <span>{this.props.title}</span>
-            </ul>
+            <div>
+                <ul>
+                {
+                    React.Children.map(this.props.children,function(child){
+                        return <li style={{listStyleType:'none'}}>{child}</li>;
+                    })
+                }
+                </ul>
+                <span>{this.props.author}</span>
+                <span>{this.props.title}</span>
+                <h3>{this.props.message}</h3>
+            </div>
             );
         }
     })
