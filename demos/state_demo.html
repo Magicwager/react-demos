@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<style>
+   .visible{
+       display:block
+   }
+    .invisible{
+        display: none;
+    }
+</style>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    /*
+    * 上面代码是一个 LikeButton 组件，它的 getInitialState 方法用于定义初始状态，也就是一个对象，这个对象可以通过 this.state 属性读取。
+    * 当用户点击组件，导致状态变化，this.setState 方法就修改状态值，每次修改以后，自动调用 this.render 方法，再次渲染组件。
+     由于 this.props 和 this.state 都用于描述组件的特性，可能会产生混淆
+    。一个简单的区分方法是，this.props 表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性。
+    * 
+    *
+    * */
+    var LikeButton = React.createClass({
+        getInitialState: function() {
+            return {displayed: false};
+        },
+        handleClick: function(event) {
+            this.setState({displayed: !this.state.displayed});
+        },
+        render: function() {
+            var visiblity=this.state.displayed?'visible':'invisible';
+            var text =this.state.displayed?'Click here to hide Your message':'Click here to show Your message';
+            return (
+                    <div>
+                        <p onClick={this.handleClick}> {text}</p>
+                        <div className={visiblity}>
+                          <span style={{fontSize:20}}>"Conguratulations!"</span>
+                        </div>
+                    </div>
+                );
+            }
+    });
+
+    ReactDOM.render(
+            <LikeButton />,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>
