@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+</body>
+<script type="text/babel">
+    /*
+    * 组件的生命周期包括三个周期：mounting--已插入真实Dom    updating--重新渲染Dom   unmounting--移除真实Dom
+    *
+    * React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。
+    *
+    *componentWillMount()
+    *componentDidMount()
+    *componentWillUpdate(object nextProps, object nextState)
+    *componentDidUpdate(object prevProps, object prevState)
+    *componentWillUnmount()
+    *
+    *
+    *
+    *
+    *
+    *
+    * */
+    var Hello = React.createClass({
+        getInitialState: function () {
+            return {
+                opacity: 1.0,
+                fontSize:30
+            };
+
+        },
+        /*componentWillMount:function(){
+            var fontSize = this.state.fontSize;
+          if (fontSize>=30){
+              fontSize=15;
+          }
+            this.setState({
+                fontSize: fontSize
+            });
+        },*//*初始状态的字体是30px，如果调用插入真实Dom之前函数，进行状态变更，则插入真实Dom中时的状态则是变更后的状态*/
+        componentDidMount: function () {
+            this.timer = setInterval(function () {
+                var opacity = this.state.opacity;
+                opacity -= .05;
+                if (opacity < 0.1) {
+                    opacity = 1.0;
+                }
+                this.setState({
+                    opacity: opacity
+                });
+            }.bind(this), 100);
+        },
+
+        render: function () {
+            return (
+                    <div style={{opacity: this.state.opacity,fontSize:this.state.fontSize}}>
+                        Hello {this.props.name}
+                    </div>
+                     );
+                }
+             });
+
+    ReactDOM.render(
+            <Hello name="world"/>,
+            document.getElementById("example")
+    );
+</script>
+</html>
