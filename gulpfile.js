@@ -13,7 +13,7 @@ var minifycss = require('gulp-minify-css');
 var koa = require('koa');
 var app = koa();
 var cfg = require('./conf/config');
-
+var browserify = require('gulp-browserify');
 var DevServer = require("portal-fe-devServer");
 var serverConfig = cfg.serverConfig;
 
@@ -57,12 +57,19 @@ gulp.task('less:dist', function () {
         .pipe(minifycss())
         .pipe(gulp.dest('dist'));
 });
-
+//
+gulp.task('browserify',function(){
+    gulp.src('./demos/second_stage_demos/index.js')
+        .pipe(browserify({
+            transform:'reactify',
+        }))
+        .pipe(gulp.dest('./dist'))
+});
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
     console.log('监听文件改动，执行相应任务');
     gulp.watch('src/**/*.less', ['less']);
-//    gulp.watch('src/**/*.es', ['es2015']);
+    gulp.watch('src/**/*.js', ['browserify']);
     gulp.watch([ 'src/**/*.html', 'src/**/*.js', 'src/**/*.css'], [ 'copy:demos']);
 });
 
