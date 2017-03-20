@@ -37,7 +37,7 @@ gulp.task('copy:demos', function () {
 
 // 匹配所有 less文件进行 less 编译
 gulp.task('less', function () {
-    gulp.src('src/**/*.less')
+    gulp.src('demos/**/*.less')
         .pipe(less())
         .pipe(rename(function (path) {
             path.extname = ".css"
@@ -46,14 +46,14 @@ gulp.task('less', function () {
 });
 
 gulp.task('less:dist', function () {
-    gulp.src(['src/**/*.less'])
+    gulp.src(['demos/**/*.less'])
         .pipe(less())
         .pipe(minifycss())
         .pipe(rename(function (path) {
             path.extname = ".css"
         }))
         .pipe(gulp.dest('dist'));
-    gulp.src(['src/**/*.css'])
+    gulp.src(['demos/**/*.css'])
         .pipe(minifycss())
         .pipe(gulp.dest('dist'));
 });
@@ -63,14 +63,14 @@ gulp.task('browserify',function(){
         .pipe(browserify({
             transform:'reactify',
         }))
-        .pipe(gulp.dest('./dist'))
+        .pipe(gulp.dest('dist'))
 });
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
     console.log('监听文件改动，执行相应任务');
-    gulp.watch('src/**/*.less', ['less']);
-    gulp.watch('src/**/*.js', ['browserify']);
-    gulp.watch([ 'src/**/*.html', 'src/**/*.js', 'src/**/*.css'], [ 'copy:demos']);
+    gulp.watch('demos/**/**/*.less', ['less']);
+    gulp.watch('demos/**/**/*.js', ['browserify']);
+    gulp.watch([ 'demos/**/**/*.html', 'demos/**/**/*.js', 'demos/**/**/*.css'], [ 'copy:demos']);
 });
 
 //清空 dist 目录下的资源
@@ -92,5 +92,5 @@ gulp.task('dev-server', function () {
 });
 
 gulp.task('before', [ 'copy:demos', 'less']);
-gulp.task('default', ['before', 'dev-server', 'watch']);
+gulp.task('default', ['before', 'browserify','dev-server', 'watch']);
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);

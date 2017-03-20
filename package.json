@@ -34,6 +34,8 @@
     "gulp-rename": "^1.2.2",
     "portal-fe-devServer": "^1.0.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "lodash": "^4.16.6",
+    "reactify": "^1.1.1"
   }
 }
