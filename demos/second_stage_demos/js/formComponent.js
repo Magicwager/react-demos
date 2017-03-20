@@ -14,7 +14,7 @@ module.exports=React.createClass({
                     "name": "档案",
                     "address": "用友软件园",
                     "phone": "1351563564",
-                    "communicate": "张辉"
+                    "communicate": "wujian"
                 }
             ],
             formFlag:false
