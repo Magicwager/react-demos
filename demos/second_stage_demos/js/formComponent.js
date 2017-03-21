@@ -20,10 +20,22 @@ module.exports=React.createClass({
             formFlag:false
         }
     },
+    /*子组件向父组件传递值*/
     onChildChanged: function (newState) {
         this.setState({
             formFlag: newState
         });
+    },
+    onCancel:function(){
+        this.setState({
+            formFlag: false
+        });
+    },
+    onSave:function(){
+        this.setState({
+            formFlag: false
+        });
+        console.log(this.state.formData)
     },
     render:function(){
         var visiblity=this.state.formFlag?'block':'none';
@@ -62,8 +74,8 @@ module.exports=React.createClass({
                                                         <input type="text" className="u-form-control" value={this.state.formData[0].communicate} />
                                     </div>
                                     <div style={{textAlign:"right",paddingRight:97}}>
-                                                            <button  className="u-button " style={{backgroundColor: "#cecece", border:" 1px #cecece solid",color:"white"}}>取消</button>
-                                                            <button  className="u-button u-button-info">保存</button>
+                                                            <button  className="u-button " onClick={this.onCancel} style={{backgroundColor: "#cecece", border:" 1px #cecece solid",color:"white"}}>取消</button>
+                                                            <button  className="u-button u-button-info" onClick={this.onSave}>保存</button>
                                     </div>
                                 </div>
                             </div>

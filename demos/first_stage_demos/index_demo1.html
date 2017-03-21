@@ -11,7 +11,13 @@
       /*text/babel：react独有的jsx语法与javascript不兼容，用到jsx语法的都要加上此标志，
       * 以下例子即为jsx语法的使用，模板代码在js中不需要用引号，可以与js混合使用
       *
-      *
+      *无论是angular还是vue，对于动态绑定的重新渲染，取决与model的数值变化，而react则是虚拟树的比较。我们来看看react的渲染流程。
+
+       1.创建一棵虚拟的dom树。
+       2.渲染到真实dom中。
+       3.model数据变化，告诉react重新在内存中生成新的虚拟dom树。
+       4.新的虚拟dom树与旧的dom树进行对比，提取两棵树不同的节点部分。
+       5.将变化部分，渲染到真实的dom上。
       *
       * */
       ReactDOM.render(
