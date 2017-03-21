@@ -58,18 +58,25 @@ gulp.task('less:dist', function () {
         .pipe(gulp.dest('dist'));
 });
 //
-gulp.task('browserify',function(){
+gulp.task('browserify2',function(){
     gulp.src('./demos/second_stage_demos/index.js')
         .pipe(browserify({
             transform:'reactify',
         }))
         .pipe(gulp.dest('dist'))
 });
+gulp.task('browserify3',function(){
+    gulp.src('./demos/third_stage_demos/main.js')
+        .pipe(browserify({
+            transform:'reactify',
+        }))
+        .pipe(gulp.dest('./dist/third_stage_demos/build'))
+});
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
     console.log('监听文件改动，执行相应任务');
     gulp.watch('demos/**/**/*.less', ['less']);
-    gulp.watch('demos/**/**/*.js', ['browserify']);
+    gulp.watch('demos/**/**/*.js', ['browserify2','browserify3']);
     gulp.watch([ 'demos/**/**/*.html', 'demos/**/**/*.js', 'demos/**/**/*.css'], [ 'copy:demos']);
 });
 
@@ -92,5 +99,5 @@ gulp.task('dev-server', function () {
 });
 
 gulp.task('before', [ 'copy:demos', 'less']);
-gulp.task('default', ['before', 'browserify','dev-server', 'watch']);
+gulp.task('default', ['before', 'browserify2','browserify3','dev-server', 'watch']);
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);
