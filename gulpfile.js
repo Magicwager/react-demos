@@ -63,13 +63,13 @@ gulp.task('browserify2',function(){
         .pipe(browserify({
             transform:'reactify',
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('./dist/second_stage_demos/build'))
 });
 gulp.task('browserify3',function(){
     gulp.src('./demos/third_stage_demos/main.js')
         .pipe(browserify({
             transform:'reactify',
-        }))
+        }))//compile JSX (superset of javascript used in react UI library) files to javascript
         .pipe(gulp.dest('./dist/third_stage_demos/build'))
 });
 //监听文件改动，执行相应任务
