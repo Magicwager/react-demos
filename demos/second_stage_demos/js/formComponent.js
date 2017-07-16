@@ -7,7 +7,7 @@ var SearchComp=require('./searchComponent');
 module.exports=React.createClass({
     getInitialState:function(){
         return{
-            formData:[
+            formData:
                 {
                     "id": "1fdsfdsfdsfer",
                     "code": "material",
@@ -15,8 +15,8 @@ module.exports=React.createClass({
                     "address": "用友软件园",
                     "phone": "1351563564",
                     "communicate": "wujian"
-                }
-            ],
+                },
+            formDataKey:["id","code","name","address","phone","communicate"],
             formFlag:false
         }
     },
@@ -25,6 +25,18 @@ module.exports=React.createClass({
         this.setState({
             formFlag: newState
         });
+    },
+    /*增加自定义属性通过data-添加，不然不认可
+     * 获取自定义属性的方法，e.target.getAttribute(key)
+     * */
+    handleChange:function(e,key){
+        var valueCallBack=function(obj){
+            var key=e.target.getAttribute("data-key");
+            obj[key]=e.target.value;
+            return obj;
+
+        }
+        this.setState({formData:valueCallBack(this.state.formData)});
     },
     onCancel:function(){
         this.setState({
@@ -39,7 +51,6 @@ module.exports=React.createClass({
     },
     render:function(){
         var visiblity=this.state.formFlag?'block':'none';
-        console.log("search")
         return (
         <div className="u-container-fluid u-widget-bg demo">
             <div className="u-row">
@@ -53,25 +64,26 @@ module.exports=React.createClass({
                             <div className="u-widget-body">
                                 <SearchComp initialformFlag={this.state.formFlag} callbackParent={this.onChildChanged}/>
                                 <div className="table-fixedheader-body "  style={{display:visiblity}}>
+
                                     <div>
                                         <span>编码:</span>
-                                        <input type="text" className="u-form-control" value={this.state.formData[0].code} onChange={this.handleChange}/>
+                                        <input type="text" className="u-form-control" placeholder="code" data-key={this.state.formDataKey[1]} value={this.state.formData.code} onChange={this.handleChange}/>
                                     </div>
                                     <div>
                                             <span>名称:</span>
-                                            <input type="text" className="u-form-control" value={this.state.formData[0].name} />
+                                            <input type="text" className="u-form-control" data-key={this.state.formDataKey[2]}  value={this.state.formData.name} onChange={this.handleChange}/>
                                     </div>
                                     <div>
                                                 <span>地址:</span>
-                                                <input type="text" className="u-form-control" value={this.state.formData[0].address} />
+                                                <input type="text" className="u-form-control" data-key={this.state.formDataKey[3]}  value={this.state.formData.address} onChange={this.handleChange}/>
                                     </div>
                                     <div>
                                                     <span>联系人:</span>
-                                                    <input type="text" className="u-form-control" value={this.state.formData[0].phone} />
+                                                    <input type="text" className="u-form-control" data-key={this.state.formDataKey[4]}  value={this.state.formData.phone} onChange={this.handleChange}/>
                                     </div>
                                     <div>
                                                         <span>电话:</span>
-                                                        <input type="text" className="u-form-control" value={this.state.formData[0].communicate} />
+                                                        <input type="text" className="u-form-control" data-key={this.state.formDataKey[5]}  value={this.state.formData.communicate} onChange={this.handleChange}/>
                                     </div>
                                     <div style={{textAlign:"right",paddingRight:97}}>
                                                             <button  className="u-button " onClick={this.onCancel} style={{backgroundColor: "#cecece", border:" 1px #cecece solid",color:"white"}}>取消</button>
