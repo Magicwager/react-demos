@@ -1,6 +1,11 @@
 # react-demos
 
 ----------
+- **使用方法**
+- npm install 安装依赖的模块
+  - 第一阶段的demo直接打开页面即可看到效果
+  - 第二阶段为组件的套用的简单例子，需要启用gulp
+    输入gulp，启动工程，端口为config下配的端口，默认是8888代理端口。通过访问localhost:8888/react-demo/second_stage_demos/index.html进入示例界面
 
 - **React 相关方法（API）介绍－ReactDom、ReactDOMServer、子节点**
 
