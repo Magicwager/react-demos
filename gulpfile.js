@@ -30,7 +30,7 @@ gulp.task('copy:demos', function () {
         'demos/**/**/*.css',
     ])
         .pipe(rename(function (path) {
-            path.dirname += '';
+            path.dirname += '/test';//相对src的路径，例如设path.dirname='./test/',则输出的路径为./dist/
         }))
         .pipe(gulp.dest("./dist"));
 });
