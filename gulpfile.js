@@ -14,6 +14,7 @@ var koa = require('koa');
 var app = koa();
 var cfg = require('./conf/config');
 var browserify = require('gulp-browserify');
+var server = require('gulp-server-livereload');
 var DevServer = require("portal-fe-devServer");
 var serverConfig = cfg.serverConfig;
 
@@ -30,7 +31,7 @@ gulp.task('copy:demos', function () {
         'demos/**/**/*.css',
     ])
         .pipe(rename(function (path) {
-            path.dirname += '/test';//相对src的路径，例如设path.dirname='./test/',则输出的路径为./dist/
+            path.dirname += '';//相对src的路径，例如设path.dirname='/test',则输出的路径会在原目录文件的外层包一层test
         }))
         .pipe(gulp.dest("./dist"));
 });
@@ -85,7 +86,7 @@ gulp.task('clean', function () {
     console.log('清空 dist 目录下的资源')
     gulp.src('dist/*', {
         read: false
-    })
+    })//read:false--阻止gulp读取文件，这样会加快任务
         .pipe(clean({
             force: true
         }));
@@ -97,7 +98,15 @@ gulp.task('dev-server', function () {
     var mockServer = new DevServer(serverConfig);
     mockServer.start(serverConfig);
 });
-
+gulp.task('server',function(){
+    gulp.src('dist')
+    .pipe(server({
+      livereload: true,
+      directoryListing: false,
+      defaultFile:"./seconde_stage_demos/index.html",
+      open: true
+    }));
+})
 gulp.task('before', [ 'copy:demos', 'less']);
 gulp.task('default', ['before', 'browserify2','browserify3','dev-server', 'watch']);
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);
