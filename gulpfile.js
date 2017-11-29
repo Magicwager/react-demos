@@ -14,6 +14,8 @@ var koa = require('koa');
 var app = koa();
 var cfg = require('./conf/config');
 var browserify = require('gulp-browserify');
+var es2015 = require("babel-preset-es2015");
+var react=require('gulp-react');
 var server = require('gulp-server-livereload');
 var DevServer = require("portal-fe-devServer");
 var serverConfig = cfg.serverConfig;
@@ -66,12 +68,19 @@ gulp.task('browserify2',function(){
         }))
         .pipe(gulp.dest('./dist/second_stage_demos/build'))
 });
+
 gulp.task('browserify3',function(){
     gulp.src('./demos/third_stage_demos/main.js')
         .pipe(browserify({
             transform:'reactify',
         }))//compile JSX (superset of javascript used in react UI library) files to javascript
         .pipe(gulp.dest('./dist/third_stage_demos/build'))
+});
+gulp.task('react-es6',function(){
+    gulp.src('./demos/es6_demos/index.js')
+        .pipe(react())//这里就是新加入的模块, 解析jsx用
+        .pipe(babel({presets:[es2015]}))//es6tojs的解析器
+        .pipe(gulp.dest('./dist/es6_demos/build'))
 });
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
@@ -108,5 +117,5 @@ gulp.task('server',function(){
     }));
 })
 gulp.task('before', [ 'copy:demos', 'less']);
-gulp.task('default', ['before', 'browserify2','browserify3','dev-server', 'watch']);
+gulp.task('default', ['before', 'browserify2','browserify3','react-es6','dev-server', 'watch']);
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);
