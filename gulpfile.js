@@ -83,8 +83,7 @@ gulp.task('react-es6',function(){
            // transform:['babelify','reactify']
         //}))//compile JSX (superset of javascript used in react UI library) files to javascript
         .pipe(react({es6module: true}))//这里就是新加入的模块, 解析jsx用
-       .pipe(babel({presets:[es2015]}))//es6tojs的解析器
-       .pipe(rename('index.js'))
+        .pipe(babel({presets:[es2015]}))//es6tojs的解析器
         .pipe(gulp.dest('./dist/es6_demos/build'))
         .pipe(webpack({//babel编译import会转成require，webpack再包装以下代码让代码里支持require
             output:{

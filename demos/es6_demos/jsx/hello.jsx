@@ -16,7 +16,7 @@ export default class Hello extends Component{
     }
     render(){
         return (
-           "Hello World!"
+           <div>"Hello World!"</div>
         )
        
     }
