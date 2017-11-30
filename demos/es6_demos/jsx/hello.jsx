@@ -3,9 +3,10 @@
  */
 import React,{Component} from 'react';
 import ReactDom from 'react-dom';
-export default class mainComp extends Component{
+export default class Hello extends Component{
     constructor(props){
-
+     super()
+     console.log("==constructor hello==");
     }
     componentWillMount(){
 
@@ -15,7 +16,7 @@ export default class mainComp extends Component{
     }
     render(){
         return (
-           <div>"Hello World!"</div>
+           "Hello World!"
         )
        
     }

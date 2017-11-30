@@ -16,6 +16,7 @@ var cfg = require('./conf/config');
 var browserify = require('gulp-browserify');
 var es2015 = require("babel-preset-es2015");
 var react=require('gulp-react');
+var webpack = require("gulp-webpack");
 var server = require('gulp-server-livereload');
 var DevServer = require("portal-fe-devServer");
 var serverConfig = cfg.serverConfig;
@@ -77,9 +78,22 @@ gulp.task('browserify3',function(){
         .pipe(gulp.dest('./dist/third_stage_demos/build'))
 });
 gulp.task('react-es6',function(){
-    gulp.src('./demos/es6_demos/index.js')
-        .pipe(react())//这里就是新加入的模块, 解析jsx用
-        .pipe(babel({presets:[es2015]}))//es6tojs的解析器
+    gulp.src('./demos/es6_demos/**/*.jsx')
+        //.pipe(browserify({
+           // transform:['babelify','reactify']
+        //}))//compile JSX (superset of javascript used in react UI library) files to javascript
+        .pipe(react({es6module: true}))//这里就是新加入的模块, 解析jsx用
+       .pipe(babel({presets:[es2015]}))//es6tojs的解析器
+       .pipe(rename('index.js'))
+        .pipe(gulp.dest('./dist/es6_demos/build'))
+        .pipe(webpack({//babel编译import会转成require，webpack再包装以下代码让代码里支持require
+            output:{
+              filename:"index.js",
+            },
+            stats:{
+              colors:true
+            }
+          }))
         .pipe(gulp.dest('./dist/es6_demos/build'))
 });
 //监听文件改动，执行相应任务
