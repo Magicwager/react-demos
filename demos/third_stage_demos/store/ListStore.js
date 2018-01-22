@@ -1,5 +1,5 @@
 var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
+var assign = require('object-assign');//合并对象，去重合并
 
 var ListStore = assign({}, EventEmitter.prototype, {
   items: [],
@@ -16,11 +16,11 @@ var ListStore = assign({}, EventEmitter.prototype, {
     this.emit('change');
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener: function (callback) {
     this.on('change', callback);
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener: function (callback) {
     this.removeListener('change', callback);
   }
 });
